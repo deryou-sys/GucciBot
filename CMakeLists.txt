@@ -54,6 +54,7 @@ if(WIN32)
     target_link_libraries(${PROJECT_NAME} PRIVATE safetyhook)
 endif()
 
+
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     MOD_VERSION="1.8.0"
     NOMINMAX
