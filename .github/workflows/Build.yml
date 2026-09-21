@@ -9,15 +9,7 @@ on:
 
 jobs:
   build:
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - name: Android
-            id: android
-            target: Android
-    
-    name: ${{ matrix.config.name }}
+    name: Android Build
     runs-on: ubuntu-latest
 
     steps:
@@ -26,4 +18,5 @@ jobs:
       - name: Build Mod
         uses: geode-sdk/build-geode-mod@main
         with:
-          target: ${{ matrix.config.target }}
+          platform: android64
+
