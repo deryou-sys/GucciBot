@@ -24,8 +24,13 @@ add_subdirectory($ENV{GEODE_SDK} $ENV{GEODE_SDK}/build)
 
 set(IMGUI_VERSION "v1.91.4" CACHE STRING "Pin imgui version" FORCE)
 CPMAddPackage("gh:matcool/gd-imgui-cocos#97643336209b760a3d59d83b770546b1cfef4e7d")
-CPMAddPackage("gh:cursey/safetyhook#main")
 CPMAddPackage("gh:zyantific/zydis#bffbb61")
+
+# Solo agregar safetyhook si es Windows
+if(WIN32)
+    CPMAddPackage("gh:cursey/safetyhook#main")
+endif()
+
 CPMAddPackage(
     NAME ZLIB
     GITHUB_REPOSITORY madler/zlib
@@ -38,12 +43,16 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_BINARY_DIR}/_deps/zlib-build
 )
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${PROJECT_NAME} PRIVATE
     imgui-cocos
-    safetyhook
     zlibstatic
     libGDR
 )
+
+# Vincular safetyhook solo en Windows
+if(WIN32)
+    target_link_libraries(${PROJECT_NAME} PRIVATE safetyhook)
+endif()
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
     MOD_VERSION="1.8.0"
