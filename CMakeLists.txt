@@ -4,6 +4,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
 project(GucciBot VERSION 1.8.0 LANGUAGES CXX)
+if(ANDROID)
+    add_compile_options(-D_LIBCPP_ENABLE_CXX23_REMOVED_FEATURES)
+endif()
 
 file(GLOB_RECURSE SOURCES src/*.cpp)
 
