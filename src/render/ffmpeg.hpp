@@ -3,7 +3,10 @@
 
 #pragma once
 
-#include <Windows.h>
+#ifdef GEODE_IS_WINDOWS
+    #include <Windows.h>
+#endif
+
 
 #include <Geode/Geode.hpp>
 #include <string>
