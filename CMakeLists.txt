@@ -43,16 +43,17 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_BINARY_DIR}/_deps/zlib-build
 )
 
-target_link_libraries(${PROJECT_NAME} PRIVATE
+target_link_libraries(${PROJECT_NAME}
     imgui-cocos
     zlibstatic
     libGDR
 )
 
-# Vincular safetyhook solo en Windows
+# Vincular safetyhook solo en Windows (Sin PRIVATE)
 if(WIN32)
-    target_link_libraries(${PROJECT_NAME} PRIVATE safetyhook)
+    target_link_libraries(${PROJECT_NAME} safetyhook)
 endif()
+
 
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
